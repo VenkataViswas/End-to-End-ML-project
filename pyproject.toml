@@ -15,5 +15,7 @@ dependencies = [
     "pandas",
     "numpy",
     "scikit-learn",
-    "flask"
+    "flask",
+    "catboost",
+    "xgboost"
 ]
