@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mlproject"
+version = "0.0.1"
+description = "End-to-End Machine Learning Project"
+authors = [{ name = "Venkata Viswas", email = "your-email@example.com" }]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
+dependencies = [
+    "ipykernel",
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "flask"
+]
