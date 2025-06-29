@@ -1,0 +1,43 @@
+import numpy as np
+import pandas as pd
+from flask import Flask, request, render_template
+from sklearn.preprocessing import StandardScaler
+from src.pipeline.predict_pipeline import CustomData, PredictPipeline
+from src.pipeline.train_pipeline import TrainPipeline
+
+
+
+application = Flask(__name__)
+app = application
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/predict', methods=['GET','POST'])
+def predict():
+    if request.method == 'POST':
+        data = CustomData(
+            gender=request.form.get('gender'),
+            race_ethnicity=request.form.get('race_ethnicity'),
+            parental_level_of_education=request.form.get('parental_level_of_education'),
+            lunch=request.form.get('lunch'),
+            test_preparation_course=request.form.get('test_preparation_course'),
+            reading_score=request.form.get('reading_score'),
+            writing_score=request.form.get('writing_score')
+        )
+        pred_df = data.get_data_as_dataframe()
+        print(pred_df)
+        predict_pipeline = PredictPipeline()
+        results = predict_pipeline.predict(features=pred_df)
+        print(results)
+        return render_template('predict.html', results=results[0])
+    else:
+        return render_template('predict.html')
+    
+
+if __name__ == "__main__":
+    #initiate the train pipeline
+    train_pipeline = TrainPipeline()
+    train_pipeline.run()
+    app.run(host='0.0.0.0', port=5000,debug=True)

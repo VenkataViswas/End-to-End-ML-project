@@ -49,10 +49,32 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, params):
             para = params[model_name] if model_name in params else {}
             gs = GridSearchCV(estimator=model, param_grid=para, cv=3, n_jobs=-1, verbose=1)
             gs.fit(X_train, y_train)
-            y_pred = gs.predict(X_test)
+            model.set_params(**gs.best_params_)
+            model.fit(X_train, y_train)
+            logger.info(f"{model_name} >> Best Parameters: {gs.best_params_}")
+            y_pred = model.predict(X_test)
             r2_square = r2_score(y_test, y_pred)
             model_report[model_name] = r2_square
             logger.info(f"{model_name} >> After Tuning >> R-squared score: {r2_square}")
         return model_report
+    except Exception as e:
+        raise CustomException(e, sys) from e
+    
+def load_object(file_path):
+    """
+    Loads an object from a file using dill.
+    
+    Parameters:
+    - file_path (str): The path from where the object will be loaded.
+    
+    Returns:
+    The loaded object.
+    """
+    try:
+        logger.info(f"Loading object from {file_path}")
+        with open(file_path, 'rb') as file_obj:
+            obj = dill.load(file_obj)
+        logger.info("Object loaded successfully.")
+        return obj
     except Exception as e:
         raise CustomException(e, sys) from e
