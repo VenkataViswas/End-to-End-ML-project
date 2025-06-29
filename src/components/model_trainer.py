@@ -42,9 +42,43 @@ class ModelTrainer:
                 'Gradient Boosting Regressor': GradientBoostingRegressor(),
                 'CatBoost Regressor': CatBoostRegressor(verbose=0),
                 'XGBoost Regressor': XGBRegressor(eval_metric='rmse')
-            }        
+            }     
+            params = {
+                        'KNeighbors Regressor': {
+                            'n_neighbors': [3, 5, 7, 9, 11]
+                        },
+                        'Decision Tree Regressor': {
+                            'max_depth': [5, 10, 15, 20],
+                            'min_samples_split': [2, 5, 10]
+                        },
+                        'Random Forest Regressor': {
+                            'n_estimators': [50, 100, 200],
+                            'max_depth': [5, 10, 20],
+                            'min_samples_split': [2, 5]
+                        },
+                        'AdaBoost Regressor': {
+                            'n_estimators': [50, 100, 150],
+                            'learning_rate': [0.01, 0.1, 1.0]
+                        },
+                        'Gradient Boosting Regressor': {
+                            'n_estimators': [100, 200],
+                            'learning_rate': [0.01, 0.1, 0.2],
+                            'max_depth': [3, 5, 7]
+                        },
+                        'CatBoost Regressor': {
+                            'iterations': [500, 1000],
+                            'learning_rate': [0.03, 0.1],
+                            'depth': [4, 6, 8]
+                        },
+                        'XGBoost Regressor': {
+                            'n_estimators': [100, 200],
+                            'learning_rate': [0.01, 0.1],
+                            'max_depth': [3, 5, 7]
+                        }
+                    }
 
-            model_report : dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models)
+
+            model_report : dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models,params=params)
             best_model_score = max(model_report.values())
             best_model_name = max(model_report, key=model_report.get)
             best_model = models[best_model_name]
