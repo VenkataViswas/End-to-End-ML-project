@@ -16,26 +16,7 @@ The project is structured to follow best practices, enabling reproducibility, cl
 - Ready for MongoDB integration in future iterations
 
 ----------------------------------------
-🗂️ Project Structure
-
-End-to-End-ML-Project/
-|
-├── .github/workflows/        # GitHub Actions workflows for CI/CD
-├── config/                   # Configuration files (YAML/JSON)
-├── logs/                     # Log files for pipeline runs
-├── notebooks/                # Jupyter notebooks for EDA and experiments
-├── src/                      # Source code for ML pipeline
-│   ├── __init__.py
-│   ├── data_ingestion.py
-│   ├── data_transformation.py
-│   ├── model_trainer.py
-│   ├── model_evaluation.py
-│   └── utils.py
-├── requirements.txt          # Python dependencies
-├── setup.py                  # Makes project pip-installable
-├── app.py                    # (Optional) Entry point for serving the model
-├── README.md                 # Project documentation
-└── .gitignore
+```plaintext 🗂️ Project Structure End-to-End-ML-Project/ | ├── .github/workflows/ # GitHub Actions workflows for CI/CD ├── config/ # Configuration files (YAML/JSON) ├── logs/ # Log files for pipeline runs ├── notebooks/ # Jupyter notebooks for EDA and experiments ├── src/ # Source code for ML pipeline │ ├── __init__.py │ ├── data_ingestion.py │ ├── data_transformation.py │ ├── model_trainer.py │ ├── model_evaluation.py │ └── utils.py ├── requirements.txt # Python dependencies ├── setup.py # Makes project pip-installable ├── app.py #  Entry point for starting the pipeline and serving the model ├── README.md # Project documentation └── .gitignore ```
 
 ----------------------------------------
 ⚙️ Features
